@@ -37,11 +37,11 @@ const keyPressAction = function (event) {
         closeFullImage();
         break;
       case "ArrowLeft":
-        currentListItem = currentListItem.previousSibling;
+        (currentListItem.previousSibling === null) ? currentListItem = currentListItem : currentListItem = currentListItem.previousSibling;
         modalImage.src = currentListItem.children[0].children[0].dataset.source;
         break;
       case "ArrowRight":
-        currentListItem = currentListItem.nextSibling;
+        (currentListItem.nextSibling === null) ? currentListItem = currentListItem : currentListItem = currentListItem.nextSibling;
         modalImage.src = currentListItem.children[0].children[0].dataset.source;
         break;
       default:

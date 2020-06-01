@@ -22,9 +22,11 @@ gallery.addEventListener("click", clickOnImage);
 //Close full image 
 const closeButton = document.querySelector("button[data-action='close-lightbox']");
 const overlay = document.querySelector("div.js-lightbox");
-const closeFullImage = () => {
-  modalWindow.classList.remove("is-open");
-  modalImage.src = "";
+const closeFullImage = (event) => {
+  if (event.target.nodeName !== "IMG") {
+    modalWindow.classList.remove("is-open");
+    modalImage.src = "";
+  };
 }
 closeButton.addEventListener("click", closeFullImage);
 overlay.addEventListener("click", closeFullImage);
@@ -34,14 +36,14 @@ const keyPressAction = function (event) {
   if (modalWindow.classList.contains("is-open")) {
     switch (event.code) {
       case "Escape":
-        closeFullImage();
+        closeFullImage(event);
         break;
       case "ArrowLeft":
-        (currentListItem.previousSibling === null) ? currentListItem = currentListItem : currentListItem = currentListItem.previousSibling;
+        (currentListItem.previousSibling === null) ? currentListItem = currentListItem: currentListItem = currentListItem.previousSibling;
         modalImage.src = currentListItem.children[0].children[0].dataset.source;
         break;
       case "ArrowRight":
-        (currentListItem.nextSibling === null) ? currentListItem = currentListItem : currentListItem = currentListItem.nextSibling;
+        (currentListItem.nextSibling === null) ? currentListItem = currentListItem: currentListItem = currentListItem.nextSibling;
         modalImage.src = currentListItem.children[0].children[0].dataset.source;
         break;
       default:
